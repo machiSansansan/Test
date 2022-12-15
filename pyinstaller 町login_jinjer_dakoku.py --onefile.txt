@@ -1,0 +1,13 @@
+pyinstaller ●●●.py --onefile
+■配布（exe）化
+pyinstaller qrcode.py --onefile
+pyinstaller 町login_jinjer_dakoku.py --onefile
+
+
+■インストール
+pip install opencv-python
+pip install opencv-contrib-python
+
+
+■バージョン確認
+python -c "import cv2; print( cv2.__version__ )"

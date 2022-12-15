@@ -85,7 +85,7 @@ try:
     taikinFlg = '0'
     if len(sys.argv) > 1:
         taikinFlg = sys.argv[1]
-
+    #taikinFlg = '1' ####################################################テスト用
     #スタートアップからの起動時（出勤処理）
     if  (taikinFlg == '1'):
         #ログイン処理　開始
@@ -104,17 +104,17 @@ try:
             #出勤ボタン押下
             element.click()
             
-            #退勤ボタンが押せる状態になったらブラウザを終了
-            #退勤ボタンが表示されるまで待機
-            wait = WebDriverWait(driver, 600)
-            selectorE = '/html/body/div[1]/div[4]/div[1]/section/main/div[2]/div[2]/ul/li[2]/button'
-            element = wait.until(EC.visibility_of_element_located((By.XPATH, selectorE)))
-            #退勤ボタンの要素を取得
-            elemBtn = driver.find_element(By.XPATH, selectorE)
-            #退勤ボタンが押せる場合
-            if (elemBtn.is_enabled()) == True :
-                #ブラウザを終了する。
-                driver.quit()
+        #     #退勤ボタンが押せる状態になったらブラウザを終了
+        #     #退勤ボタンが表示されるまで待機
+        #     wait = WebDriverWait(driver, 600)
+        #     selectorE = '/html/body/div[1]/div[4]/div[1]/section/main/div[2]/div[2]/ul/li[2]/button'
+        #     element = wait.until(EC.visibility_of_element_located((By.XPATH, selectorE)))
+        #     #退勤ボタンの要素を取得
+        #     elemBtn = driver.find_element(By.XPATH, selectorE)
+        #     #退勤ボタンが押せる場合
+        #     if (elemBtn.is_enabled()) == True :
+            #ブラウザを終了する。
+            driver.quit()
         else:
             #出勤ボタンが押せ無い状態（すでに「出勤」ボタンが押された状態。）
             #jinjar確認するか（する「はい」→jinjar開いたまま、しない「いいえ」→jinjar閉じる）
@@ -144,26 +144,29 @@ try:
                 #退勤ボタン押下
                 element.click()
                 
-                #出勤ボタンが表示されるまで待機
-                wait = WebDriverWait(driver, 600)
-                selectorS = '//*[@id="container"]/section/main/div[2]/div[2]/ul/li[1]/button'
-                element = wait.until(EC.visibility_of_element_located((By.XPATH, selectorS)))
-                #出勤ボタンの要素を取得
-                elemBtn = driver.find_element(By.XPATH, selectorS)
-                #出勤ボタンが押せる場合、ブラウザを閉じ3病後にwindowsシャットダウン。
-                if (elemBtn.is_enabled() == True):
-                    #ブラウザを終了する。
-                    driver.quit()
-                    #windows 3秒後に終了
-                    os.system(f'shutdown /s /t 3')    
+                # #出勤ボタンが表示されるまで待機
+                # wait = WebDriverWait(driver, 600)
+                # selectorS = '//*[@id="container"]/section/main/div[2]/div[2]/ul/li[1]/button'
+                # element = wait.until(EC.visibility_of_element_located((By.XPATH, selectorS)))
+                # #出勤ボタンの要素を取得
+                # elemBtn = driver.find_element(By.XPATH, selectorS)
+                # #出勤ボタンが押せる場合、ブラウザを閉じ3病後にwindowsシャットダウン。
+                # if (elemBtn.is_enabled() == True):
+                
+                #ブラウザを終了する。
+                driver.quit()
+                #windows 3秒後に終了
+                os.system(f'shutdown /s /t 3')    
             else: #すでに退勤ボタンが押された状態でしたのポップアップを表示し、jinjar開いたままにする。
-                pass
+                # pass
                 #退勤ボタンが押せ無い状態（すでに「退勤」ボタンが押された状態。）
-                #jinjar確認するか（する「はい」→jinjar開いたまま、しない「いいえ」→jinjar閉じる）
+                #jinjar確認するか（「はい」→jinjar閉じる>windowsシャットダウン。「いいえ」→jinjar開いたまま）
                 ansCloseUpDriver = closeUpDriver('退勤')
                 if ansCloseUpDriver == 'yes':
                     #ブラウザを終了する。
                     driver.quit()
+                    #windows 3秒後に終了
+                    os.system(f'shutdown /s /t 3')  
                 else:
                     pass
         elif ansAskQuestion == False:
