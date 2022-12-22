@@ -85,7 +85,7 @@ try:
     taikinFlg = '0'
     if len(sys.argv) > 1:
         taikinFlg = sys.argv[1]
-    #taikinFlg = '1' ####################################################テスト用
+    # taikinFlg = '1' ####################################################テスト用
     #スタートアップからの起動時（出勤処理）
     if  (taikinFlg == '1'):
         #ログイン処理　開始
@@ -113,6 +113,8 @@ try:
         #     elemBtn = driver.find_element(By.XPATH, selectorE)
         #     #退勤ボタンが押せる場合
         #     if (elemBtn.is_enabled()) == True :
+            #1秒待機
+            sleep(1)
             #ブラウザを終了する。
             driver.quit()
         else:
@@ -187,7 +189,7 @@ try:
             # driver.quit()
             pass
 except:
-    # メッセージボックス（エラー） 
-    messagebox.showerror('エラー', 'エラーが発生しました。自動打刻処理を終了します。')
+    #メッセージボックス（エラー） 
+    messagebox.showerror('エラー','エラーが発生しました。自動打刻処理を終了します。')
     #ブラウザを終了する。
     driver.quit()
